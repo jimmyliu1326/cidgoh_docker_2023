@@ -122,7 +122,7 @@ docker build -t [image_name]:[image_tag] [Path to Dockerfile]
 ```
 **Example command**
 ```bash
-docker build -t blast .
+docker build -t blast:[username] .
 ```
 
 ---
