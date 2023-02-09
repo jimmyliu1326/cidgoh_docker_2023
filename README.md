@@ -1,7 +1,7 @@
 # Docker Tutorial for CIDGOH QC Workflow Hackathon 2023
 
 ## Description
-> *[I]t is often easier to write new code than reuse old. (Trikovic et al. 2022)*
+> *[I]t is often easier to write new code than reuse old. (Trisovic et al. 2022)*
 
 Attempting to reproduce scientific results can be next to impossible. Despite the increased transparency in scientific research, many codes linked to publications are not reproducible nor reusable. This is in part due to the inability to reproduce the required computational environments (libraries, dependencies, operating systems) to execute the scripts and programmes.
 
