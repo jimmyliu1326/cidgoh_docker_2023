@@ -21,15 +21,21 @@ section.lead h1 {
   margin-left: 40px;
   margin-bottom: 450px;
 }
+section.lead h3 {
+  text-align: left;
+  float: right;
+}
 header {
-    width: 350px;
-    margin-left:-35px;
-    text-align: right;
+    width: 700px;
+    margin-left: -145px;
+    text-align: center;
     font-size: 30px
 }
 header img {
-    width: 150px;
-    margin-right: 175px;
+    width: 10px;
+    margin-left: 145px;
+    margin-top: -7px;
+    float: left;
 }
 </style>
 
@@ -41,15 +47,19 @@ header img {
 ![](../img/LogoCIDGOH2.png)
 " -->
 
-# Software Containerization with Docker
+# Software Containerization <br> with Docker
 ## Jimmy Liu <br> Feb 14th 2023
 
+<!-- _header: "
+![w:60px](../img/github-mark.png)
+jimmyliu1326/cidgoh_docker_2023
+" -->
 ---
 ![bg contain right:55%](../img/world-of-languages.png)
 
 # The world is a diverse place
 
-<!-- _footer: "Credit: " -->
+<!-- _footer: "Credit: Lopez (2015)" -->
 
 ---
 <!-- _header: "Credit: Wikipedia" -->
@@ -84,9 +94,9 @@ header img {
 
 ---
 # Docker Architecture
-<!-- _header: "![](https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png)" -->
+<!-- _header: "![width:150px](https://www.docker.com/wp-content/uploads/2022/03/vertical-logo-monochromatic.png)" -->
 ![width:500px bg right:50%](../img/docker-diagram.png)
-- Can virtualize multiple OS on any host infrastructure
+- A client-server application powered by `Docker Engine`
 - Source code, libraries, dependencies are packaged in immutable objects called `images`
 - Mutable running instances of `images` are called `containers`
 
@@ -104,11 +114,11 @@ header img {
 | `RUN` | Command(s) to execute | ```RUN pip install pandas``` |
 | `ARG` | Define variables within Dockerfile | ```ARG script="./src/parse.py"``` |
 | `ADD` | Import files from the host system | ```ADD $script /src/``` |
-| `ENV` | Define environment variables accessible <br> within containers | ```ENV BLAST_DB="/data/ncbi.db"``` |
+| `ENV` | Define environment variables <br> accessible within containers | ```ENV BLAST_DB="/data/ncbi.db"``` |
 
 ---
 # Demo: Writing a Dockerfile (10 minutes)
-#### 1. Build a custom image using `biocontainers/blast:2.2.31` as base image
+#### 1. Build a custom image using `staphb/blast:2.13.0` as base image
 #### 2. Add the query sequence to the image under `/data`
 #### 3. Add the BLAST database to the image under `/blast_db`
 
@@ -130,12 +140,14 @@ docker build -t blast:[username] .
 
 **Command structure**
 ```bash
-docker run [image_name] [cmd]
+docker run [options] [image_name] [cmd]
 ```
 
 **Example command**
 ```bash
-docker run blast blastn \
+docker run -w $(pwd) -v $(pwd):$(pwd) \
+    blast:[username] \
+    blastn \
     -db /blast_db/plasmids \
     -query /data/query.fasta \
     -out blast.out \
@@ -155,7 +167,7 @@ docker login -u [username] -p [password]
 
 **Tag image**
 ```
-docker tag blast cidgoh/blast:[username]
+docker tag blast:[username] cidgoh/blast:[username]
 ```
 
 **Push image to DockerHub**
